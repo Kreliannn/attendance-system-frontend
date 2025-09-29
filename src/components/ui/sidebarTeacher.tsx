@@ -1,6 +1,13 @@
 "use client"
 import Link from "next/link"
 import { Calendar, Home, Building, Search, UserPlus2, User, FileText, BarChart3, Building2, LogOut, Menu, X } from "lucide-react"
+import {
+  Users,
+  ClipboardCheck,
+  MessageSquare,
+  FileBarChart,
+  Settings,
+} from "lucide-react";
 import { useState, useEffect } from "react"
 import {
   Sidebar,
@@ -16,7 +23,8 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 
-// Navigation items
+
+
 const navigationItems = [
   {
     title: "Dashboard",
@@ -24,32 +32,31 @@ const navigationItems = [
     icon: Home,
   },
   {
-    title: "student",
+    title: "Student",
     url: "/pages/teacher/student",
-    icon: UserPlus2,
+    icon: Users, // 👥 for student list
   },
   {
-    title: "analytics",
-    url: "/pages/teacher/analytics",
-    icon: Building,
+    title: "Attendance",
+    url: "/pages/teacher/attendance",
+    icon: ClipboardCheck, // ✅ attendance check
   },
-
   {
-    title: "sms",
+    title: "SMS",
     url: "/pages/teacher/sms",
-    icon: Building,
+    icon: MessageSquare, // 💬 messaging
   },
   {
-    title: "reportPage",
+    title: "Report",
     url: "/pages/teacher/reportPage",
-    icon: Building,
+    icon: FileBarChart, // 📊 reports
   },
   {
-    title: "settingsPage",
+    title: "Settings",
     url: "/pages/teacher/settingsPage",
-    icon: Building,
+    icon: Settings, // ⚙️ settings
   },
-]
+];
 
 const accountItems = [
   {

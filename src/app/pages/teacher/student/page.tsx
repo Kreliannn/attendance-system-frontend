@@ -98,7 +98,7 @@ export default function Page() {
     <div className="flex-1 p-6 bg-stone-50 min-h-screen">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Left column - Add Student */}
-        <Card className="shadow-md rounded-2xl">
+        <Card className="shadow-md rounded-2xl h-[650px]">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-lg font-semibold text-red-900">
               <PlusCircle className="w-5 h-5 text-red-600" />
@@ -131,8 +131,8 @@ export default function Page() {
                   <SelectValue placeholder="Select section" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="11m1">11M1</SelectItem>
-                  <SelectItem value="11m2">11M2</SelectItem>
+                  <SelectItem value="Humss">Humss</SelectItem>
+                  <SelectItem value="Cookery">Cookery</SelectItem>
                 </SelectContent>
               </Select>
 
@@ -150,8 +150,10 @@ export default function Page() {
           </CardContent>
         </Card>
 
+     
+
         {/* Right column - Student List */}
-        <Card className="shadow-md rounded-2xl">
+        <Card className="shadow-md rounded-2xl  h-[650px] overflow-auto" >
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-lg font-semibold text-red-900">
               <Users className="w-5 h-5 text-red-600" />
@@ -168,7 +170,7 @@ export default function Page() {
               />
             </div>
 
-            <Table>
+            <Table >
               <TableHeader>
                 <TableRow>
                   <TableHead>Name</TableHead>
@@ -178,7 +180,7 @@ export default function Page() {
                   <TableHead className="text-center">Action</TableHead>
                 </TableRow>
               </TableHeader>
-              <TableBody>
+              <TableBody  >
                 {filteredStudents.length > 0 ? (
                   filteredStudents.map((student) => (
                     <TableRow key={student._id}>
