@@ -46,7 +46,8 @@ export default function Page() {
 
   return (
     <div className="flex-1 p-6 bg-stone-50 min-h-screen"> 
-        <div className="flex w-full m-auto rounded-lg overflow-hidden">
+
+      <div className="flex w-full m-auto rounded-lg overflow-hidden">
           <div onClick={() => setSection("Humss")} className={` w-full p-3 flex items-center justify-center ${(section == "Humss") ? "bg-red-900 text-white" : "bg-stone-200 text-red-900"}`} >
               <h1 className="text-2xl"> Humss </h1>
           </div>

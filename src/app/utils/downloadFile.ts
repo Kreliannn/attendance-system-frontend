@@ -1,29 +1,88 @@
 import * as XLSX from "xlsx";
 import { studentInterface } from "../types/student.type";
 import { attendanceInterface } from "../types/attendance.type";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
-export function exportAttendanceToExcel() {
-  const data = [
-     { student: "John Doe", attendance: { "2025-09-01": "P", "2025-09-02": "A", "2025-09-03": "P" } },
-     { student: "Jane Smith", attendance: { "2025-09-01": "P", "2025-09-02": "P", "2025-09-03": "P" } }
-   ]
-  const dates = ["2025-09-01", "2025-09-02", "2025-09-03"]
+
+export function exportAttendanceToPDF(students: studentInterface[], attendance: attendanceInterface[]) {
+  const allDate = attendance.map((item) => item.date);
+  const dates = [...new Set(allDate)];
+
+  // Build header row
+  const header = ["Student", ...dates, "Total Present"];
+
+  // Build rows
+  const rows = students.map((student) => {
+    const row: string[] = [student.name];
+    let total = 0;
+
+    dates.forEach((date) => {
+      let status = "absent";
+      attendance.forEach((item) => {
+        if (item.student._id === student._id && item.date === date) {
+          if (item.status === "present") {
+            status = "present";
+            total += 1;
+          }
+        }
+      });
+      row.push(status);
+    });
+
+    row.push(total.toString());
+    return row;
+  });
+
+  // Generate PDF
+  const doc = new jsPDF();
+
+  // Title
+  doc.setFontSize(16);
+  doc.text("Attendance Report", 14, 15);
+
+  // AutoTable
+  autoTable(doc, {
+    head: [header],
+    body: rows,
+    startY: 25,
+    headStyles: { fillColor: [41, 128, 185] }, // blue header
+  });
+
+  // Save PDF
+  doc.save("attendance.pdf");
+}
+
+
+
+export function exportAttendanceToExcel(
+  students: studentInterface[],
+  attendance: attendanceInterface[]
+) {
+  const allDate = attendance.map((item) => item.date);
+  const dates = [...new Set(allDate)].sort(); // optional: sort dates
 
   // Build dynamic header row
   const header = ["Student", ...dates, "Total Present"];
 
-  // Build rows
-  const rows = data.map((d) => {
-    const row = [d.student];
+  const rows = students.map((student) => {
+    const row: string[] = [student.name];
     let total = 0;
+
     dates.forEach((date) => {
-            //@ts-ignore
-      const status = d.attendance[date] || "-";
-      if (status === "P") total++;
+      let status = "absent";
+      attendance.forEach((item) => {
+        if (item.student._id === student._id && item.date === date) {
+          if (item.status === "present") {
+            status = "present";
+            total += 1;
+          }
+        }
+      });
       row.push(status);
     });
-    //@ts-ignore
-    row.push(total);
+
+    row.push(total.toString());
     return row;
   });
 
@@ -33,6 +92,15 @@ export function exportAttendanceToExcel() {
   // Create worksheet
   const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
 
+  // ✅ Set column widths
+  const colWidths = header.map((col, idx) => {
+    if (idx === 0) return { wch: 20 }; // Student column wider
+    if (col === "Total Present") return { wch: 15 };
+    return { wch: 12 }; // date/status columns
+  });
+
+  worksheet["!cols"] = colWidths;
+
   // Create workbook and append sheet
   const workbook = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(workbook, worksheet, "Attendance");
@@ -41,48 +109,3 @@ export function exportAttendanceToExcel() {
   XLSX.writeFile(workbook, "attendance.xlsx");
 }
 
-
-
-export function test(students : studentInterface[], attendance : attendanceInterface[]) {
-
-     const allDate = attendance.map((item) => item.date)
-     const dates = [...new Set(allDate)];
-
-    // Build dynamic header row
-    const header = ["Student", ...dates, "Total Present"];
-
-    const rows = students.map((student) => {
-        const row: string[] = [student.name];
-        let total = 0;
-    
-        dates.forEach((date) => {
-          let status = "absent";
-          attendance.forEach((item) => {
-            if (item.student._id === student._id && item.date === date) {
-              if (item.status === "present") {
-                status = "present";
-                total += 1;
-              }
-            }
-          });
-          row.push(status);
-        });
-    
-        row.push(total.toString()); 
-        return row; 
-      });
-    
-    // Combine header + rows
-    const worksheetData = [header, ...rows];
-  
-    // Create worksheet
-    const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
-  
-    // Create workbook and append sheet
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Attendance");
-  
-    // Export file
-    XLSX.writeFile(workbook, "attendance.xlsx");
-  }
-  
