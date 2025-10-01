@@ -29,6 +29,7 @@ export default function Page() {
   const [students, setStudents] = useState<studentInterface[]>([]);
   const [section, setSection] = useState("Humss");
   const [attendance, setAttendance] = useState<attendanceInterface[]>([]);
+  
 
   // Fetch students
   const { data } = useQuery({
@@ -76,29 +77,33 @@ export default function Page() {
 
       {/* Header Card */}
       <Card>
-        <CardHeader>
-          <CardTitle className="text-lg font-semibold">Attendance Records</CardTitle>
-          <CardDescription>
-            Section: <span className="font-medium">{section}</span>
-          </CardDescription>
+        <CardHeader className="flex items-center justify-between">
+          <div>
+            <CardTitle className="text-lg font-semibold">Attendance Records</CardTitle>
+            <CardDescription>
+              Section: <span className="font-medium">{section}</span>
+            </CardDescription>
+          </div>
+
+          <div className="flex gap-4">
+            <Button
+              variant="default"
+              className="flex items-center bg-red-800 hover:bg-red-900 gap-2"
+              onClick={() => exportAttendanceToExcel(students, attendance)}
+            >
+              <FileSpreadsheet className="w-4 h-4" /> Download Excel
+            </Button>
+            <Button
+              variant="default"
+              className="flex items-center bg-red-800 hover:bg-red-900 gap-2"
+              onClick={() => exportAttendanceToPDF(students, attendance)}
+            >
+              <FileDown className="w-4 h-4" /> Download PDF
+            </Button>
+          </div>
         </CardHeader>
-        <CardContent className="flex gap-4">
-          <Button
-            variant="default"
-            className="flex items-center  bg-red-800 hover:bg-red-900 gap-2"
-            onClick={() => exportAttendanceToExcel(students, attendance)}
-          >
-            <FileSpreadsheet className="w-4 h-4" /> Download Excel
-          </Button>
-          <Button
-            variant="default"
-            className="flex items-center  bg-red-800 hover:bg-red-900 gap-2"
-            onClick={() => exportAttendanceToPDF(students, attendance)}
-          >
-            <FileDown className="w-4 h-4" /> Download PDF
-          </Button>
-        </CardContent>
       </Card>
+
 
       {/* Attendance Table */}
       <Card>
@@ -125,21 +130,26 @@ export default function Page() {
                     <TableRow key={student._id}>
                       <TableCell className="font-medium">{student.name}</TableCell>
                       {dates.map((date) => {
-                        let status = "absent"; // Absent by default
+                        let status = "no record"; // Absent by default
                         attendance.forEach((item) => {
                           if (item.student._id === student._id && item.date === date) {
                             if (item.status === "present") {
                               status = "present";
                               total += 1;
+                            } else {
+                              status = "absent";
                             }
                           }
                         });
                         return (
                           <TableCell
                             key={date}
-                            className={`${
-                              status === "present" ? "text-green-600 font-medium" : "text-red-500"
-                            }`}
+                            className={`
+                              ${status === "present"  && "text-green-600 font-medium"}
+                              ${status === "absent"  && "text-red-600 font-medium"}
+                              ${status === "no record"  && "text-stone-600 font-medium"}
+                              `
+                            }
                           >
                             {status}
                           </TableCell>

@@ -24,6 +24,21 @@ interface chartDataInterface {
   totalPresent: number
 }
 
+const mockUp = [
+  { date: "2025-09-20", totalAbsent: 5, totalPresent: 15 },
+  { date: "2025-09-21", totalAbsent: 11, totalPresent: 13 },
+  { date: "2025-09-22", totalAbsent: 13, totalPresent: 11 },
+  { date: "2025-09-23", totalAbsent: 2, totalPresent: 15 },
+  { date: "2025-09-24", totalAbsent: 19, totalPresent: 12 },
+  { date: "2025-09-25", totalAbsent: 7, totalPresent: 20 },
+  { date: "2025-09-26", totalAbsent: 12, totalPresent: 15 },
+  { date: "2025-09-27", totalAbsent: 1, totalPresent: 16 },
+  { date: "2025-09-28", totalAbsent: 4, totalPresent: 13 },
+  { date: "2025-09-29", totalAbsent: 5, totalPresent: 10 },
+  
+  
+];
+
 const chartConfig = {
   totalAbsent: {
     label: "Absent",
@@ -49,7 +64,7 @@ export function ChartComponent({ chartData }: { chartData: chartDataInterface[] 
         <ChartContainer config={chartConfig} className="w-full h-full">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart
-              data={chartData}
+              data={mockUp}
               margin={{
                 left: 12,
                 right: 12,

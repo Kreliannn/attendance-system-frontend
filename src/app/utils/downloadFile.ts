@@ -18,12 +18,14 @@ export function exportAttendanceToPDF(students: studentInterface[], attendance: 
     let total = 0;
 
     dates.forEach((date) => {
-      let status = "absent";
+      let status = "no record";
       attendance.forEach((item) => {
         if (item.student._id === student._id && item.date === date) {
           if (item.status === "present") {
             status = "present";
             total += 1;
+          } else {
+            status = "absent";
           }
         }
       });
@@ -70,12 +72,14 @@ export function exportAttendanceToExcel(
     let total = 0;
 
     dates.forEach((date) => {
-      let status = "absent";
+      let status = "no record";
       attendance.forEach((item) => {
         if (item.student._id === student._id && item.date === date) {
           if (item.status === "present") {
             status = "present";
             total += 1;
+          } else {
+            status = "absent";
           }
         }
       });

@@ -17,7 +17,7 @@ export default function LoginPage() {
       <div className="bg-white shadow rounded-2xl p-8 w-[450px]">
 
         <div className="w-28 h-28 m-auto">
-          <img src="/logo.png" alt="Logo" className="object-cover w-full h-full rounded-full" />
+          <img src="/logo.jpg" alt="Logo" className="object-cover w-full h-full rounded-full" />
         </div>
 
         <br />

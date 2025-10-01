@@ -87,7 +87,7 @@ export function TeacherSideBar({ className }: AppSidebarProps) {
       <div className="lg:hidden bg-red-900 text-white p-4 flex items-center justify-between fixed top-0 left-0 right-0 z-50">
         <div className="flex items-center gap-3">
           <div className="aspect-square size-8 overflow-hidden rounded-lg">
-            <img src="/logo.png" alt="Logo" className="object-cover w-full h-full rounded-lg" />
+            <img src="/logo.jpg" alt="Logo" className="object-cover w-full h-full rounded-lg" />
           </div>
           <div className="flex flex-col">
             <span className="font-semibold text-sm">STNHS</span>
@@ -153,7 +153,7 @@ export function TeacherSideBar({ className }: AppSidebarProps) {
               <SidebarMenuButton size="lg" asChild className="hover:bg-red-900">
                 <a href="/" className="font-semibold">
                   <div className="aspect-square size-8 overflow-hidden rounded-lg w-10 h-10">
-                    <img src="/logo.png" alt="Logo" className="object-cover w-full h-full rounded-lg" />
+                    <img src="/logo.jpg" alt="Logo" className="object-cover w-full h-full rounded-lg" />
                   </div>
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <span className="truncate font-semibold text-white">STNHS</span>
