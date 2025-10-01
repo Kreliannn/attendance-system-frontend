@@ -13,9 +13,10 @@ import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { studentInterface } from "@/app/types/student.type";
 import { attendanceInterface, insertAttendanceInterface } from "@/app/types/attendance.type";
-import { successAlert, errorAlert } from "@/app/utils/alert";
+import { successAlert, errorAlert, confirmAlert } from "@/app/utils/alert";
 import axios from "axios";
 import { backendUrl } from "@/app/utils/url";
+import Swal from "sweetalert2";
 
 // lucide-react icons
 import { CheckCircle, XCircle, User2, CalendarDays } from "lucide-react";
@@ -56,7 +57,7 @@ export function StudentSeat({
   }
 
   const mutation = useMutation({
-    mutationFn: (data: insertAttendanceInterface) => axios.post(backendUrl("/attendance"), data),
+    mutationFn: ({attendance, sendSms} : {attendance : insertAttendanceInterface, sendSms : boolean}) => axios.post(backendUrl("/attendance"), {attendance, sendSms}),
     onSuccess: () => {
       refetch()
       successAlert("Attendance recorded")
@@ -69,7 +70,33 @@ export function StudentSeat({
   })
 
   const handleAttendance = (status: string) => {
-    mutation.mutate({ student: student._id, status: status, date: today })
+    if(status == "absent"){
+      setOpen(false)
+      Swal.fire({
+        title: 'Send Sms To Student Parents?',
+        text: "are you sure? you cant revert this.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#22c55e',
+        cancelButtonColor: '#d33',
+        confirmButtonText: "send sms to parents",
+        cancelButtonText : "dont send",
+        allowOutsideClick: false,  
+        allowEscapeKey: false     
+      }).then((result) => {
+        let sendSms = false
+        if (result.isConfirmed) sendSms = true
+        mutation.mutate({
+          sendSms : sendSms,
+          attendance : { student: student._id, status: status, date: today }
+        })
+      })
+      return
+    }
+    mutation.mutate({
+      sendSms : false,
+      attendance : { student: student._id, status: status, date: today }
+    })
   }
 
   return (

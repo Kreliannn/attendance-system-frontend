@@ -1,5 +1,11 @@
 "use client";
 import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import { backendUrl } from "@/app/utils/url";
+import { successAlert, errorAlert } from "@/app/utils/alert";
+import {insertTeacherInterface} from "@/app/types/teacher.type";
+
 
 
 export default function RegisterComponent() {
@@ -9,8 +15,37 @@ export default function RegisterComponent() {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
+    const mutation = useMutation({
+        mutationFn: (data: insertTeacherInterface) => axios.post(backendUrl("/teacher"),  data),
+        onSuccess: () => {
+            successAlert("Account created");
+            setEmail("");
+            setUsername("");
+            setPassword("");
+            setConfirmPassword("");
+        },
+        onError: (e) => {
+            console.log(e)
+            errorAlert("you're already registered");
+        },
+    });
+
+
+    const registerHanlder = () => {
+        if (!email || !username || !password || !confirmPassword) {
+            errorAlert("All fields are required");
+            return;
+        }
+        if (password !== confirmPassword) {
+            errorAlert("Passwords do not match");
+            return;
+        }
+        const smsMessage = "Dear Parent/Guardian, your child [STUDENT_NAME] was marked absent today. please contact the school if needed"
+        mutation.mutate({ email, username, password, smsMessage });
+    }
+
   return (
-    <form className="space-y-4">
+    <div className="space-y-4">
 
         {/* email */}
         <div>
@@ -96,12 +131,12 @@ export default function RegisterComponent() {
 
         {/* Submit button */}
         <button
-        type="submit"
+        onClick={registerHanlder}
         className="w-full bg-red-900 text-white font-medium py-2 rounded-lg hover:bg-red-800 transition"
         >
             Sign Up
         </button>
-    </form>
+    </div>
   )
   
 }
