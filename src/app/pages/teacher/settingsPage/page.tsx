@@ -1,22 +1,52 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
 import { Trash2 } from "lucide-react";
 import { useTeacherStore } from "@/app/store/teacherStore";
-import { confirmAlert } from "@/app/utils/alert";
+import { confirmAlert, successAlert, errorAlert } from "@/app/utils/alert";
+import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
+import axios from "axios";
+import { backendUrl } from "@/app/utils/url";
+import { teacherInterface } from "@/app/types/teacher.type";
 
 export default function Page() {
-  const {teacher} = useTeacherStore()
+  const {teacher, setTeacher} = useTeacherStore()
   const [smsMessage, setSmsMessage] = useState(teacher?.smsMessage);
+
+  const mutation = useMutation({
+    mutationFn: (teacher: teacherInterface) =>
+      axios.put(backendUrl("/teacher/" + teacher._id),  teacher ),
+    onSuccess: (response) => {
+      const updatedData : teacherInterface = response.data
+      successAlert("Sms Message Updated");
+      setTeacher(updatedData)
+      setSmsMessage(updatedData.smsMessage)
+      console.log(updatedData)
+    },
+    onError: () => {
+      errorAlert("Failed to edit sms message");
+    },
+  });
+
 
   const handleEndQuarter = () => {
     confirmAlert("This will clear all attendance data and reset to start.", "proceed to next quarter", () => {
 
     })
   };
+
+  const updateSmsMessage = () => {
+    if(!teacher || !smsMessage) return
+    mutation.mutate({
+      ...teacher,
+      smsMessage : smsMessage
+    })
+  }
+
+
 
   return (
     <div className="flex-1 p-6 bg-stone-50 min-h-screen space-y-6">
@@ -56,6 +86,9 @@ export default function Page() {
             className="min-h-[100px]"
           />
         </CardContent>
+        <CardFooter className="flex justify-end">
+            <Button className="bg-green-500 hover:bg-green-600 " onClick={updateSmsMessage}> Update </Button>
+        </CardFooter>
       </Card>
     </div>
   );

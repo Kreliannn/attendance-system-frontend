@@ -17,6 +17,7 @@ import { successAlert, errorAlert, confirmAlert } from "@/app/utils/alert";
 import axios from "axios";
 import { backendUrl } from "@/app/utils/url";
 import Swal from "sweetalert2";
+import { useTeacherStore } from "@/app/store/teacherStore";
 
 // lucide-react icons
 import { CheckCircle, XCircle, User2, CalendarDays } from "lucide-react";
@@ -35,6 +36,7 @@ export function StudentSeat({
   const date = new Date();
   const today = date.toISOString().split("T")[0];
 
+  const { teacher } = useTeacherStore()
 
   
 
@@ -57,7 +59,7 @@ export function StudentSeat({
   }
 
   const mutation = useMutation({
-    mutationFn: ({attendance, sendSms} : {attendance : insertAttendanceInterface, sendSms : boolean}) => axios.post(backendUrl("/attendance"), {attendance, sendSms}),
+    mutationFn: ({attendance, sendSms, teacher} : {attendance : insertAttendanceInterface, sendSms : boolean, teacher : string}) => axios.post(backendUrl("/attendance"), {attendance, sendSms, teacher}),
     onSuccess: () => {
       refetch()
       successAlert("Attendance recorded")
@@ -70,6 +72,7 @@ export function StudentSeat({
   })
 
   const handleAttendance = (status: string) => {
+    if(!teacher?._id) return
     if(status == "absent"){
       setOpen(false)
       Swal.fire({
@@ -88,15 +91,18 @@ export function StudentSeat({
         if (result.isConfirmed) sendSms = true
         mutation.mutate({
           sendSms : sendSms,
-          attendance : { student: student._id, status: status, date: today }
+          attendance : { student: student._id, status: status, date: today},
+          teacher : teacher._id
         })
       })
       return
     }
     mutation.mutate({
       sendSms : false,
-      attendance : { student: student._id, status: status, date: today }
+      attendance : { student: student._id, status: status, date: today },
+      teacher : teacher._id
     })
+
   }
 
   return (
