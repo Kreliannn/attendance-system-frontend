@@ -3,6 +3,7 @@ export interface insertTeacherInterface {
     username: string,
     password: string,
     smsMessage : string,
+    pin : string,
 }
 
 
@@ -12,6 +13,7 @@ export interface teacherInterface {
     username: string,
     password: string,
     smsMessage : string,
+    pin : string,
 }
 
 
