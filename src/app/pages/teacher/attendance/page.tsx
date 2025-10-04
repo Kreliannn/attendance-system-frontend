@@ -48,11 +48,11 @@ export default function Page() {
     <div className="flex-1 p-6 bg-stone-50 min-h-screen"> 
 
       <div className="flex w-full m-auto rounded-lg overflow-hidden">
-          <div onClick={() => setSection("Humss")} className={` w-full p-3 flex items-center justify-center ${(section == "Humss") ? "bg-red-900 text-white" : "bg-stone-200 text-red-900"}`} >
+          <div onClick={() => setSection("Humss")} className={` w-full p-3 flex items-center justify-center ${(section == "Humss") ? "bg-blue-900 text-white" : "bg-stone-200 text-blue-900"}`} >
               <h1 className="text-2xl"> Humss </h1>
           </div>
 
-          <div onClick={() => setSection("Cookery")} className={` w-full p-3 flex items-center justify-center ${(section != "Humss") ? "bg-red-900 text-white" : "bg-stone-200 text-red-900"}`}>
+          <div onClick={() => setSection("Cookery")} className={` w-full p-3 flex items-center justify-center ${(section != "Humss") ? "bg-blue-900 text-white" : "bg-stone-200 text-blue-900"}`}>
               <h1 className="text-2xl"> Cookery </h1>
           </div>
       </div>
@@ -60,16 +60,47 @@ export default function Page() {
       <br />
 
       <div className="m-auto w-5/6 ">
-          <h1 className="text-red-900 text-4xl font-bold"> Students Seats </h1>
+          <h1 className="text-blue-900 text-4xl font-bold"> Students Seats </h1>
       </div>
 
       <br />
 
-      <div className="m-auto w-5/6 shadow bg-stone-50 rounded p-3 grid grid-cols-7  ">
-        {students.map((student) => (
-          <StudentSeat key={student._id}  student={student} attendance={attendance} refetch={refetch} />
-        ))}
+      <div className="m-auto w-full max-w-6xl shadow bg-stone-50 rounded p-5">
+        <div className="flex flex-col-reverse gap-3">
+          {Array.from({ length: Math.ceil(students.length / 10) }).map((_, rowIndex) => {
+            const rowStudents = students.slice(rowIndex * 10, rowIndex * 10 + 10);
+
+            return (
+              <div key={rowIndex} className="grid grid-cols-11 gap-2">
+                {/* Left side - 5 seats */}
+                {rowStudents.slice(0, 5).map((student) => (
+                  <StudentSeat
+                    key={student._id}
+                    student={student}
+                    attendance={attendance}
+                    refetch={refetch}
+                  />
+                ))}
+
+                {/* Teacher space / aisle (always empty) */}
+                <div className="bg-transparent" />
+
+                {/* Right side - 5 seats */}
+                {rowStudents.slice(5, 10).map((student) => (
+                  <StudentSeat
+                    key={student._id}
+                    student={student}
+                    attendance={attendance}
+                    refetch={refetch}
+                  />
+                ))}
+              </div>
+            );
+          })}
+        </div>
       </div>
+
+
 
     </div>
   )

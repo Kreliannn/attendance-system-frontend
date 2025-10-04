@@ -110,10 +110,10 @@ export function StudentSeat({
       <DialogTrigger asChild>
         <div
           onClick={() => setOpen(true)}
-          className={` mb-5 rounded-xl shadow-md flex justify-center items-center w-28 h-28 cursor-pointer transition-all duration-200 ${checkStudentAttendance(student)}`}
+          className={` mb-1 rounded-xl shadow-md flex  text-stone-500 justify-center items-center w-24 h-24 cursor-pointer transition-all duration-200 ${checkStudentAttendance(student)}`}
           key={student._id}
         >
-          <h1 className="text-sm font-medium text-center">{student.name}</h1>
+          <h1 className="text-xs font-medium text-center ">{student.name}</h1>
         </div>
       </DialogTrigger>
 

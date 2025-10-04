@@ -100,8 +100,8 @@ export default function Page() {
         {/* Left column - Add Student */}
         <Card className="shadow-md rounded-2xl h-[650px]">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-lg font-semibold text-red-900">
-              <PlusCircle className="w-5 h-5 text-red-600" />
+            <CardTitle className="flex items-center gap-2 text-lg font-semibold text-blue-900">
+              <PlusCircle className="w-5 h-5 text-blue-600" />
               Add Student
             </CardTitle>
           </CardHeader>
@@ -143,7 +143,7 @@ export default function Page() {
 
             <Button
               onClick={handleAdd}
-              className="w-full bg-red-900 hover:bg-red-800"
+              className="w-full bg-blue-900 hover:bg-blue-800"
             >
               Add Student
             </Button>

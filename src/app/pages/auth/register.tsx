@@ -51,7 +51,7 @@ export default function RegisterComponent() {
         <div>
             <label
                 htmlFor="email"
-                className="block text-sm font-medium text-red-800"
+                className="block text-sm font-medium text-blue-800"
             >
                 email
             </label>
@@ -60,7 +60,7 @@ export default function RegisterComponent() {
                 type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 w-full rounded-lg border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-red-900"
+                className="mt-1 w-full rounded-lg border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-900"
                 placeholder="Enter email"
                 required
             />
@@ -70,7 +70,7 @@ export default function RegisterComponent() {
         <div>
             <label
                 htmlFor="username"
-                className="block text-sm font-medium text-red-800"
+                className="block text-sm font-medium text-blue-800"
             >
                 Username
             </label>
@@ -79,7 +79,7 @@ export default function RegisterComponent() {
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="mt-1 w-full rounded-lg border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-red-900"
+                className="mt-1 w-full rounded-lg border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-900"
                 placeholder="Enter username"
                 required
             />
@@ -90,7 +90,7 @@ export default function RegisterComponent() {
             <div>
                 <label
                     htmlFor="password"
-                    className="block text-sm font-medium text-red-800"
+                    className="block text-sm font-medium text-blue-800"
                 >
                     Password
                 </label>
@@ -99,7 +99,7 @@ export default function RegisterComponent() {
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="mt-1 w-full rounded-lg border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-red-900"
+                    className="mt-1 w-full rounded-lg border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-900"
                     placeholder="Enter password"
                     required
                 />
@@ -110,7 +110,7 @@ export default function RegisterComponent() {
             <div>
                 <label
                     htmlFor="confirmPassword"
-                    className="block text-sm font-medium text-red-800"
+                    className="block text-sm font-medium text-blue-800"
                 >
                     confirm password
                 </label>
@@ -119,7 +119,7 @@ export default function RegisterComponent() {
                     type="password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="mt-1 w-full rounded-lg border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-red-900"
+                    className="mt-1 w-full rounded-lg border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-900"
                     placeholder="Enter password"
                     required
                 />
@@ -132,7 +132,7 @@ export default function RegisterComponent() {
         {/* Submit button */}
         <button
         onClick={registerHanlder}
-        className="w-full bg-red-900 text-white font-medium py-2 rounded-lg hover:bg-red-800 transition"
+        className="w-full bg-blue-900 text-white font-medium py-2 rounded-lg hover:bg-blue-800 transition"
         >
             Sign Up
         </button>

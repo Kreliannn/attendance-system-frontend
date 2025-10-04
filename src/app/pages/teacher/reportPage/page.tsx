@@ -64,11 +64,11 @@ export default function Page() {
     <div className="flex-1 p-6 bg-stone-50 min-h-screen space-y-6">
 
       <div className="flex w-full m-auto rounded-lg overflow-hidden">
-          <div onClick={() => setSection("Humss")} className={` w-full p-3 flex items-center justify-center ${(section == "Humss") ? "bg-red-900 text-white" : "bg-stone-200 text-red-900"}`} >
+          <div onClick={() => setSection("Humss")} className={` w-full p-3 flex items-center justify-center ${(section == "Humss") ? "bg-blue-900 text-white" : "bg-stone-200 text-blue-900"}`} >
               <h1 className="text-2xl"> Humss </h1>
           </div>
 
-          <div onClick={() => setSection("Cookery")} className={` w-full p-3 flex items-center justify-center ${(section != "Humss") ? "bg-red-900 text-white" : "bg-stone-200 text-red-900"}`}>
+          <div onClick={() => setSection("Cookery")} className={` w-full p-3 flex items-center justify-center ${(section != "Humss") ? "bg-blue-900 text-white" : "bg-stone-200 text-blue-900"}`}>
               <h1 className="text-2xl"> Cookery </h1>
           </div>
       </div>
@@ -88,14 +88,14 @@ export default function Page() {
           <div className="flex gap-4">
             <Button
               variant="default"
-              className="flex items-center bg-red-800 hover:bg-red-900 gap-2"
+              className="flex items-center bg-blue-800 hover:bg-blue-900 gap-2"
               onClick={() => exportAttendanceToExcel(students, attendance)}
             >
               <FileSpreadsheet className="w-4 h-4" /> Download Excel
             </Button>
             <Button
               variant="default"
-              className="flex items-center bg-red-800 hover:bg-red-900 gap-2"
+              className="flex items-center bg-blue-800 hover:bg-blue-900 gap-2"
               onClick={() => exportAttendanceToPDF(students, attendance)}
             >
               <FileDown className="w-4 h-4" /> Download PDF

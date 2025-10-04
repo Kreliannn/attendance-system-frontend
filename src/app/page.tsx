@@ -67,17 +67,17 @@ export default function LoginPage() {
 
         <br />
 
-        <h1 className="text-2xl font-bold text-center">Sto. Tomas National High School</h1>
-        <p className="text-lg text-red-900 text-center">Attendance Monitoring System</p>
+        <h1 className="text-2xl font-bold text-center">DEFEMNHS</h1>
+        <p className="text-lg text-blue-900 text-center">Attendance Monitoring System</p>
 
         <br />
 
         <div className="flex w-full m-auto rounded-lg overflow-hidden">
-            <div onClick={() => setIsSignIn(prev => !prev)} className={` w-full p-3 flex items-center justify-center ${(isSignIn) ? "bg-red-900 text-white" : "bg-stone-200 text-red-900"}`} >
+            <div onClick={() => setIsSignIn(prev => !prev)} className={` w-full p-3 flex items-center justify-center ${(isSignIn) ? "bg-blue-900 text-white" : "bg-stone-200 text-blue-900"}`} >
                 <h1 className="text-2xl"> Sign In </h1>
             </div>
 
-            <div onClick={() => setIsSignIn(prev => !prev)} className={` w-full p-3 flex items-center justify-center ${(!isSignIn) ? "bg-red-900 text-white" : "bg-stone-200 text-red-900"}`}>
+            <div onClick={() => setIsSignIn(prev => !prev)} className={` w-full p-3 flex items-center justify-center ${(!isSignIn) ? "bg-blue-900 text-white" : "bg-stone-200 text-blue-900"}`}>
                 <h1 className="text-2xl"> Sign up </h1>
             </div>
         </div>
@@ -91,7 +91,7 @@ export default function LoginPage() {
         <div className="text-center mt-4">
           <button
             onClick={handleForgotPassword}
-            className="text-red-900 hover:text-red-800 hover:underline text-sm font-medium"
+            className="text-blue-900 hover:text-blue-800 hover:underline text-sm font-medium"
           >
             Forgot Password?
           </button>

@@ -84,7 +84,7 @@ export function TeacherSideBar({ className }: AppSidebarProps) {
   return (
     <>
       {/* Mobile Navbar */}
-      <div className="lg:hidden bg-red-900 text-white p-4 flex items-center justify-between fixed top-0 left-0 right-0 z-50">
+      <div className="lg:hidden bg-blue-900 text-white p-4 flex items-center justify-between fixed top-0 left-0 right-0 z-50">
         <div className="flex items-center gap-3">
           <div className="aspect-square size-8 overflow-hidden rounded-lg">
             <img src="/logo.jpg" alt="Logo" className="object-cover w-full h-full rounded-lg" />
@@ -96,7 +96,7 @@ export function TeacherSideBar({ className }: AppSidebarProps) {
         </div>
         <button
           onClick={toggleMobileMenu}
-          className="p-2 hover:bg-red-800 rounded-lg transition-colors"
+          className="p-2 hover:bg-blue-800 rounded-lg transition-colors"
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -105,7 +105,7 @@ export function TeacherSideBar({ className }: AppSidebarProps) {
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
         <div className="lg:hidden fixed inset-0 z-40  bg-opacity-50" onClick={closeMobileMenu}>
-          <div className="fixed top-0 left-0 w-64 h-full bg-gradient-to-b from-red-800 to-red-900 transform transition-transform duration-300 ease-in-out">
+          <div className="fixed top-0 left-0 w-64 h-full bg-gradient-to-b from-blue-800 to-blue-900 transform transition-transform duration-300 ease-in-out">
             <div className="pt-20 px-4">
               <div className="mb-6">
                 <h3 className="text-stone-100 text-sm font-medium mb-3">Section</h3>
@@ -117,7 +117,7 @@ export function TeacherSideBar({ className }: AppSidebarProps) {
                         key={item.title}
                         href={item.url}
                         onClick={closeMobileMenu}
-                        className="flex items-center gap-3 px-3 py-2 text-stone-100 hover:bg-red-700 rounded-lg transition-colors"
+                        className="flex items-center gap-3 px-3 py-2 text-stone-100 hover:bg-blue-700 rounded-lg transition-colors"
                       >
                         <item.icon size={20} />
                         <span>{item.title}</span>
@@ -133,7 +133,7 @@ export function TeacherSideBar({ className }: AppSidebarProps) {
                     key={item.title}
                     href={item.url}
                     onClick={closeMobileMenu}
-                    className="flex items-center gap-3 px-3 py-2 text-stone-100 hover:bg-red-700 rounded-lg transition-colors"
+                    className="flex items-center gap-3 px-3 py-2 text-stone-100 hover:bg-blue-700 rounded-lg transition-colors"
                   >
                     <item.icon size={20} />
                     <span>{item.title}</span>
@@ -147,10 +147,10 @@ export function TeacherSideBar({ className }: AppSidebarProps) {
 
       {/* Desktop Sidebar */}
       <Sidebar className={`hidden lg:flex ${className}`}>
-        <SidebarHeader className="bg-red-900">
+        <SidebarHeader className="bg-blue-900">
           <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton size="lg" asChild className="hover:bg-red-900">
+              <SidebarMenuButton size="lg" asChild className="hover:bg-blue-900">
                 <a href="/" className="font-semibold">
                   <div className="aspect-square size-8 overflow-hidden rounded-lg w-10 h-10">
                     <img src="/logo.jpg" alt="Logo" className="object-cover w-full h-full rounded-lg" />
@@ -165,7 +165,7 @@ export function TeacherSideBar({ className }: AppSidebarProps) {
           </SidebarMenu>
         </SidebarHeader>
 
-        <SidebarContent className="bg-gradient-to-r from-red-800 bg-red-900">
+        <SidebarContent className="bg-gradient-to-r from-blue-800 bg-blue-900">
           <SidebarGroup>
             <SidebarGroupLabel className="text-stone-100">Section</SidebarGroupLabel>
             <SidebarGroupContent>
@@ -189,7 +189,7 @@ export function TeacherSideBar({ className }: AppSidebarProps) {
           </SidebarGroup>
         </SidebarContent>
 
-        <SidebarFooter className="bg-gradient-to-r from-red-800 bg-red-900">
+        <SidebarFooter className="bg-gradient-to-r from-blue-800 bg-blue-900">
           <SidebarMenu>
             {accountItems.map((item) => (
               <SidebarMenuItem key={item.title} className="text-stone-100">

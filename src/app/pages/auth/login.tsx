@@ -44,7 +44,7 @@ export default function LoginComponent() {
         <div>
         <label
             htmlFor="username"
-            className="block text-sm font-medium text-red-800"
+            className="block text-sm font-medium text-blue-800"
         >
             Username
         </label>
@@ -53,7 +53,7 @@ export default function LoginComponent() {
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="mt-1 w-full rounded-lg border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-red-900"
+            className="mt-1 w-full rounded-lg border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-900"
             placeholder="Enter username"
             required
         />
@@ -63,7 +63,7 @@ export default function LoginComponent() {
         <div>
         <label
             htmlFor="password"
-            className="block text-sm font-medium text-red-800"
+            className="block text-sm font-medium text-blue-800"
         >
             Password
         </label>
@@ -72,7 +72,7 @@ export default function LoginComponent() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="mt-1 w-full rounded-lg border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-red-900"
+            className="mt-1 w-full rounded-lg border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-900"
             placeholder="Enter password"
             required
         />
@@ -83,7 +83,7 @@ export default function LoginComponent() {
         {/* Submit button */}
         <button
         type="submit"
-        className={`w-full bg-red-900 text-white font-medium py-2 rounded-lg hover:bg-red-800 transition ${isLoading && "animate-pulse" }`}
+        className={`w-full bg-blue-900 text-white font-medium py-2 rounded-lg hover:bg-blue-800 transition ${isLoading && "animate-pulse" }`}
         disabled={isLoading}
         onClick={loginHandler}
         >

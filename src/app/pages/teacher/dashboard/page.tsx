@@ -53,7 +53,7 @@ export default function Page() {
     <div className="flex-1 p-6 bg-stone-50 min-h-screen">
       {/* Dashboard Header */}
       <div className="max-w-6xl mx-auto mb-8">
-        <h1 className="text-3xl font-bold text-red-900">Dashboard</h1>
+        <h1 className="text-3xl font-bold text-blue-900">Dashboard</h1>
       </div>
 
       {/* Top Cards */}

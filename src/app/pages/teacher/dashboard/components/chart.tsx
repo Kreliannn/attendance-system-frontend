@@ -64,7 +64,7 @@ export function ChartComponent({ chartData }: { chartData: chartDataInterface[] 
         <ChartContainer config={chartConfig} className="w-full h-full">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart
-              data={mockUp}
+              data={chartData}
               margin={{
                 left: 12,
                 right: 12,

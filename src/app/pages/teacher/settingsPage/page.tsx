@@ -32,9 +32,21 @@ export default function Page() {
   });
 
 
+  const mutationClear = useMutation({
+    mutationFn: () => axios.delete(backendUrl("/attendance/clear")),
+    onSuccess: (response) => {
+      successAlert("attendance cleared");
+    },
+    onError: () => {
+      errorAlert("Failed to end quarter");
+    },
+  });
+
+
+
   const handleEndQuarter = () => {
     confirmAlert("This will clear all attendance data and reset to start.", "proceed to next quarter", () => {
-
+      mutationClear.mutate()
     })
   };
 
@@ -62,8 +74,8 @@ export default function Page() {
             </CardDescription>
           </div>
           <Button
-            variant="destructive"
-            className="flex items-center gap-2"
+   
+            className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600"
             onClick={handleEndQuarter}
           >
             <Trash2 className="w-4 h-4" /> End Quarter
@@ -87,7 +99,7 @@ export default function Page() {
           />
         </CardContent>
         <CardFooter className="flex justify-end">
-            <Button className="bg-green-500 hover:bg-green-600 " onClick={updateSmsMessage}> Update </Button>
+            <Button className="bg-blue-500 hover:bg-blue-600 " onClick={updateSmsMessage}> Update </Button>
         </CardFooter>
       </Card>
     </div>
