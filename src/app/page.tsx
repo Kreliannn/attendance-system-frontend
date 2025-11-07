@@ -1,7 +1,7 @@
 // app/login/page.tsx (Next.js 13+ with App Router)
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { backendUrl } from "./utils/url";
 import axios from "axios";
@@ -9,11 +9,27 @@ import LoginComponent from "./pages/auth/login";
 import RegisterComponent from "./pages/auth/register";
 import { successAlert, errorAlert } from "./utils/alert";
 import { submitEmailModal, verificationCodeModal, changePasswordModal } from "./utils/modal";
+import { useQuery } from "@tanstack/react-query";
 
 export default function LoginPage() {
  
 
   const [isSignIn, setIsSignIn] = useState(true);
+
+  const [isSeverSleep, setIsSeverSleep] = useState(true);
+
+
+  const { data, isLoading  } = useQuery({
+    queryKey: ["server"],
+    queryFn: () => axios.get(backendUrl("/teacher/dashboard")),
+    refetchInterval : 1000
+  });
+
+  useEffect(() => {
+    if (data?.data) {
+      setIsSeverSleep(false)
+    }
+  }, [data]);
 
  
 
@@ -59,6 +75,32 @@ export default function LoginPage() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
+
+      <div className="fixed top-4 right-4 z-50">
+        <div
+          className={`flex items-center gap-2 px-4 py-2 rounded-lg shadow-lg text-white ${
+            isSeverSleep ? "bg-red-600 animate-pulse" : "bg-green-600"
+          }`}
+        >
+          <span
+            className={`w-3 h-3 rounded-full ${
+              isSeverSleep ? "bg-red-300" : "bg-green-300"
+            }`}
+          ></span>
+          <span className="font-medium text-sm">
+              {isSeverSleep ? (
+                <span className="font-medium text-sm">
+                  Server asleep — please wait <b>3–5 minutes</b> before you can access the system’s backend.
+                </span>
+              ) : (
+                <span className="font-medium text-sm">
+                  Server is awake — backend is now accessible ✅
+                </span>
+            )}
+          </span>
+        </div>
+      </div>
+
       <div className="bg-white shadow rounded-2xl p-8 w-[450px]">
 
         <div className="w-28 h-28 m-auto">
@@ -67,7 +109,7 @@ export default function LoginPage() {
 
         <br />
 
-        <h1 className="text-2xl font-bold text-center">DEFEMNHS</h1>
+        <h1 className="text-2xl font-bold text-center" > {isSeverSleep ? "sleep server" : "DEFEMNHS"} </h1>
         <p className="text-lg text-blue-900 text-center">Attendance Monitoring System</p>
 
         <br />

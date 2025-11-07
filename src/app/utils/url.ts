@@ -1,3 +1,3 @@
 export const backendUrl = ( endPoint : string = "") => {
-    return "http://localhost:5000" + endPoint
+    return "https://attendance-system-backend-q879.onrender.com" + endPoint
 }
