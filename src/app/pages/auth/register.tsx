@@ -24,9 +24,8 @@ export default function RegisterComponent() {
             setPassword("");
             setConfirmPassword("");
         },
-        onError: (e) => {
-            console.log(e)
-            errorAlert("you're already registered");
+        onError: (e : {response : { data : { error : string}}}) => {
+            errorAlert(e.response.data.error);
         },
     });
 
@@ -41,7 +40,7 @@ export default function RegisterComponent() {
             return;
         }
         const smsMessage = "Dear Parent/Guardian, your child [STUDENT_NAME] was marked absent today. please contact the school if needed"
-        mutation.mutate({ email, username, password, smsMessage, pin : "" });
+        mutation.mutate({ email, username, password, smsMessage, pin : "123456" });
     }
 
   return (
