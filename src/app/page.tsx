@@ -109,7 +109,7 @@ export default function LoginPage() {
 
         <br />
 
-        <h1 className="text-2xl font-bold text-center" > {isSeverSleep ? "sleep server" : "DEFEMNHS"} </h1>
+        <h1 className="text-2xl font-bold text-center" > DEFEMNHS</h1>
         <p className="text-lg text-blue-900 text-center">Attendance Monitoring System</p>
 
         <br />
