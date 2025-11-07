@@ -81,6 +81,10 @@ export default function Page() {
       errorAlert("All fields are required");
       return;
     }
+    if (contact.length != 11) {
+      errorAlert("contact must be 11 digit");
+      return;
+    }
     mutation.mutate({ name, parent, contact, section });
   };
 
