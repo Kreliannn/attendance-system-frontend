@@ -85,6 +85,13 @@ export default function Page() {
       errorAlert("contact must be 11 digit");
       return;
     }
+
+    if (!(/^\d+$/.test(contact))) {
+      errorAlert("letter and special character is not allowed");
+      return;
+    }
+    
+    
     mutation.mutate({ name, parent, contact, section });
   };
 
