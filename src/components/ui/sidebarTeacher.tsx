@@ -157,7 +157,7 @@ export function TeacherSideBar({ className }: AppSidebarProps) {
                     <img src="/logo.jpg" alt="Logo" className="object-cover w-full h-full rounded-lg" />
                   </div>
                   <div className="grid flex-1 text-left text-sm leading-tight">
-                    <span className="truncate font-semibold text-white">STNHS</span>
+                    <span className="truncate font-semibold text-white">DEFEMNHS</span>
                     <span className="truncate text-xs text-stone-100"> Adviser </span>
                   </div>
                 </a>
