@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/sidebar"
 
 
+const i = 0
 
 const navigationItems = [
   {
@@ -90,7 +91,7 @@ export function TeacherSideBar({ className }: AppSidebarProps) {
             <img src="/logo.jpg" alt="Logo" className="object-cover w-full h-full rounded-lg" />
           </div>
           <div className="flex flex-col">
-            <span className="font-semibold text-sm">DEFEMNHS</span>
+            <span className="font-semibold text-sm">DEFEMNHS </span>
             <span className="text-xs text-stone-100">Adviser</span>
           </div>
         </div>
